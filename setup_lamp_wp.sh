@@ -4,6 +4,7 @@ while true; do
   echo "1) Installation LAMP"
   echo "2) Installation LAMP & Wordpress"
   echo "2) Update & Upgrade de votre LAMP"
+  echo "4) Désinstallation de votre LAMP"
   echo "3) Quitter"
   read -p "Choisissez une option : " choice
   case $choice in
@@ -62,11 +63,11 @@ while true; do
         if ! [ -x "$(command -v php)" ]; then
             echo "PHP n'est pas installé. Installations en cours..."
             sudo apt-get install php libapache2-mod-php -y
+            sudo apt-get install php-mysql -y
         else
             echo "PHP est déjà installé."
+            sudo apt-get install php-mysql -y
         fi
-
-
 
 
         # -------- Crée le fichier de configuration Apache --------
@@ -107,17 +108,21 @@ while true; do
          echo ""
          echo "Voila votre site et prets a etre utiliser"
 
-
-
                 break
                 ;;
 
+
+
+
+
+
+
+
+
+
+
     2)  echo "Installation LAMP en cours..."
         # -------- Installation du LAMP --------
-
-
-
-
 
         # Demande les informations nécessaires à l'utilisateur A REFAIRE VERIFIER DE BASE SI CA EXISTE SINON ON DEMANDE
         read -p "Entrez votre nom (ex : Aterrieur ): " name
@@ -160,9 +165,12 @@ while true; do
         if ! [ -x "$(command -v php)" ]; then
             echo "PHP n'est pas installé. Installations en cours..."
             sudo apt-get install php libapache2-mod-php -y
+            sudo apt-get install php-mysql -y
         else
             echo "PHP est déjà installé."
+            sudo apt-get install php-mysql -y
         fi
+
 
 
 
@@ -187,16 +195,7 @@ while true; do
          sudo mkdir $directory
 
         # -------- Crée un fichier index.html dans le répertoire --------
-        sudo touch $directory/index.html
-        sudo chmod 755 $directory/index.html
-        echo "<html>
-         <head>
-             <title>$domain</title>
-         </head>
-         <body>
-             <h1>Bienvenue sur $domain</h1>
-         </body>
-         </html>" >$directory/index.html
+        sudo mkdir $directory
 
 
          echo ""
@@ -207,6 +206,8 @@ while true; do
         # -------- Installation de Wordpress --------
         # -------- On va dans le repertoire home --------
         cd ~
+        mkdir script_wordpress
+        cd script_wordpress
         # -------- Téléchargement de Wordpress --------
         wget https://wordpress.org/latest.tar.gz
         
@@ -250,27 +251,33 @@ while true; do
         # -------- On crée la base de données --------
         mysql -u root -p -e "CREATE DATABASE $dbname"
         mysql -u root -p -e "GRANT ALL PRIVILEGES ON $dbname.* TO $dbuser@localhost IDENTIFIED BY '$dbpass'"
+        mysql -u root -p -e "FLUSH PRIVILEGES"
 
-        # -------- Configuration de Wordpress --------
-        cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
-        sed -i "s/database_name_here/$dbname/g" /var/www/html/wordpress/wp-config.php
-        sed -i "s/username_here/$dbuser/g" /var/www/html/wordpress/wp-config.php
-        sed -i "s/password_here/$dbpass/g" /var/www/html/wordpress/wp-config.php
 
         # -------- Redémarre Apache pour prendre en compte les changements --------
          sudo systemctl reload apache2
          sudo service apache2 restart
+
          echo ""
          echo "Installation de Wordpress terminée"
          echo ""
          echo "Pour accéder à l'interface d'administration de Wordpress, rendez-vous à l'adresse suivante dans votre navigateur :"
          echo "http://$domain/wordpress/wp-admin"
          echo ""
-         echo "N'oubliez pas de supprimer le fichier latest.tar.gz après l'installation."
+         echo "Maintenant il faut configurer le sertificat SSL via certbot. "
+         echo "Si vous avez une backup de wordpress, suivez églament les instructions dans la documentations. "
 
 
         break
         ;;
+
+
+
+
+
+
+
+
 
 
     3)  echo "Update & Upgrade en cours..."
@@ -282,12 +289,23 @@ while true; do
 
 
 
-
-
-    4)  exit
+    4)  echo "Suppression de LAMP en cours..."
+        # -------- Suppression de LAMP --------
+        sudo apt-get remove apache2 -y
+        sudo apt-get remove mysql-server -y
+        sudo apt-get remove php libapache2-mod-php -y
+        sudo apt-get remove php-mysql -y
+        sudo apt-get autoremove -y
+        break
         ;;
 
-do rm -r latest.tar.gz
+
+
+
+
+    5)  exit
+        ;;
+
     *) # -------- dans le cas ou l'utilisateur rentre autre chose que 1, 2 ou 3 --------
         clear
         echo "Option non valide"
