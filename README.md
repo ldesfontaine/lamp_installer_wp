@@ -4,8 +4,8 @@ Ce script bash vous permet d'installer facilement un environnement LAMP (Linux, 
 ## Utilisation
 Téléchargez le script sur votre serveur en utilisant la commande git clone https://github.com/ldesfontaine/lamp_installer_wp.git
 
-Rendez-vous dans le répertoire où se trouve le script en utilisant la commande cd lamp_installer_wp
-Pour lancer le script faire : sudo bash setup_lamp_wp.sh
+Rendez-vous dans le répertoire où se trouve le script en utilisant la commande cd lamp_installer_wp . 
+Pour lancer le script faire : " sudo bash setup_lamp_wp.sh "
 Suivez les instructions à l'écran pour installer LAMP et Wordpress, mettre à jour ou supprimer l'environnement.
 
 ## Options
