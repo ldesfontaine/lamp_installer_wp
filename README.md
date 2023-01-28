@@ -1,5 +1,24 @@
-# lamp_installer_wp
+#Installation de LAMP et Wordpress
+Ce script bash vous permet d'installer facilement un environnement LAMP (Linux, Apache, MySQL et PHP) ainsi que Wordpress sur votre serveur. Il vous permet également de mettre à jour et de supprimer cet environnement.
 
-Il s'agit d'un script ecris en Shell, permettant l'installation d'un LAMP et la configuration de celui ci automatiquement.
-Le script prends également en charge l'installation d'un wordpress.
+##Utilisation
+Téléchargez le script sur votre serveur en utilisant la commande git clone https://github.com/votre_nom_dutilisateur/votre_nom_de_dépôt
 
+Rendez-vous dans le répertoire où se trouve le script en utilisant la commande cd votre_nom_de_dépôt
+Donnez les permissions d'exécution au script en utilisant la commande chmod +x nom_du_script.sh
+Exécutez le script en utilisant la commande ./nom_du_script.sh
+
+Suivez les instructions à l'écran pour installer LAMP et Wordpress, mettre à jour ou supprimer l'environnement.
+
+##Options
+Installation LAMP : Cette option vous permet d'installer un environnement LAMP sur votre serveur. Il vous demandera votre nom, le nom de domaine et votre adresse e-mail pour configurer Apache.
+
+Installation LAMP & Wordpress : Cette option vous permet d'installer un environnement LAMP ainsi que Wordpress sur votre serveur. Il vous demandera également les informations nécessaires pour configurer Wordpress.
+
+Mise à jour & Upgrade de votre LAMP : Cette option vous permet de mettre à jour les paquets de votre environnement LAMP.
+
+Désinstallation de votre LAMP : Cette option vous permet de supprimer complètement votre environnement LAMP de votre serveur.
+Quitter : Cette option vous permet de quitter le script.
+
+##Note
+Il est important de noter que ce script a été testé et fonctionne correctement avec POPos. Il peut ne pas fonctionner correctement sur d'autres distributions Linux.
