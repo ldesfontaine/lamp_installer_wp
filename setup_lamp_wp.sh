@@ -206,8 +206,13 @@ while true; do
         # -------- Installation de Wordpress --------
         # -------- On va dans le repertoire home --------
         cd ~
-        mkdir script_wordpress
-        cd script_wordpress
+        mkdir script_wordpress_$name
+        cd script_wordpress_$name
+        pwd
+        pwd
+        pwd
+        pwd
+
         # -------- Téléchargement de Wordpress --------
         wget https://wordpress.org/latest.tar.gz
         
@@ -252,6 +257,10 @@ while true; do
         mysql -u root -p -e "CREATE DATABASE $dbname"
         mysql -u root -p -e "GRANT ALL PRIVILEGES ON $dbname.* TO $dbuser@localhost IDENTIFIED BY '$dbpass'"
         mysql -u root -p -e "FLUSH PRIVILEGES"
+
+        #on supprime les dossiers & fichiers inutiles
+        cd ~
+        sudo rm -r script_wordpress_$name
 
 
         # -------- Redémarre Apache pour prendre en compte les changements --------
