@@ -28,7 +28,7 @@ check_MySql_Secure(){
       echo "MySQL n'est pas installé et sécurisé. Installations en cours..."
       sudo mysql_secure_installation
       touch /root/.mysql_secure_installation
-      #on fait l'installation avec les paramètres par défaut TODO faire une installation plus sécurisé
+      #TODO faire une installation plus sécurisé
 
   fi
 }
@@ -68,7 +68,9 @@ apache_conf(){
 
    #on active le site et désactive le site par défaut
   sudo a2ensite "$domain".conf
-  sudo a2dissite 000-default.conf
+  if [ -f /etc/apache2/sites-enabled/000-default.conf ]; then
+      sudo a2dissite 000-default.conf
+  fi
 }
 
 directory(){
