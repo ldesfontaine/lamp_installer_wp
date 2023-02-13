@@ -38,7 +38,15 @@ check_MySql_Secure(){
       sudo mysql_secure_installation
       touch /root/.mysql_secure_installation
       #TODO faire une installation plus sécurisé + probleme connexion mysql/bdd avec wordpress ....
-
+      EOF
+      y
+      secret
+      secret
+      y
+      y
+      y
+      y
+      EOF
   fi
 }
 
