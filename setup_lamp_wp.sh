@@ -15,7 +15,7 @@ check_MySql(){
   # Vérification de l'installation de MySQL
   if ! [ -x "$(command -v mysql)" ]; then
       echo "MySQL n'est pas installé. Installations en cours..."
-      sudo apt-get install mysql-server -y
+      sudo apt-get install mysql -y
   else
       echo "MySQL est déjà installé."
   fi
@@ -182,7 +182,9 @@ info_user(){
 
 
 
-
+#nom de la bdd mysqlbdd
+#identifiant mysqluser
+#pwd mysql
 
 
 upgrade_LAMP(){
@@ -226,7 +228,7 @@ while true; do
     clear
     echo "Menu"
     echo "1. Installer LAMP"
-    echo "2. Installer Wordpress"
+    echo "2. Installer Wordpress + LAMP"
     echo "3. Supprimer LAMP"
     echo "4. Mettre à jour LAMP"
     echo "5. Quitter"
