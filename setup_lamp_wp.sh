@@ -96,7 +96,7 @@ directory_lamp(){
        <h1>Bienvenue sur $domain</h1>
    </body>
    </html>" >"$directory"/index.html
-
+}
 
 
 directory(){
