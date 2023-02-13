@@ -237,7 +237,7 @@ while true; do
            install_lamp
            ;;
         2) info_user
-           install_wordpress
+           install_wordpress_lamp
            ;;
         3) usntall_LAMP
            ;;
