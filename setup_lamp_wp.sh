@@ -82,7 +82,7 @@ apache_conf(){
   fi
 }
 
-directory(){
+directory_lamp(){
 # -------- Crée le répertoire pour le site --------
   sudo mkdir "$directory"
 # -------- Crée un fichier index.html dans le répertoire --------
@@ -97,6 +97,11 @@ directory(){
    </body>
    </html>" >"$directory"/index.html
 
+
+
+directory(){
+# -------- Crée le répertoire pour le site --------
+  sudo mkdir "$directory"
 }
 
 restart_service(){
@@ -191,11 +196,6 @@ info_user(){
 
 
 
-#nom de la bdd mysqlbdd
-#identifiant mysqluser
-#pwd mysql
-
-
 upgrade_LAMP(){
 # -------- Mise a jour et upgrade du systeme --------
   sudo apt-get update -y
@@ -220,7 +220,7 @@ install_lamp(){
   check_PHP
   db_setup
   apache_conf
-  directory
+  directory_lamp
   restart_service
 }
 
@@ -233,9 +233,11 @@ install_wordpress_lamp(){
   check_PHP
   db_setup
   apache_conf
+  directory
   restart_service
   download_wordpress
   clear_script
+  restart_service
   show_info
 }
 
