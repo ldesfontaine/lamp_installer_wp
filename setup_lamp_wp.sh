@@ -216,7 +216,15 @@ install_lamp(){
 }
 
 install_wordpress_lamp(){
-  install_lamp
+  echo "Installation de LAMP en cours..."
+  echo ""
+  upgrade_LAMP
+  check_apache
+  check_MySql
+  check_PHP
+  db_setup
+  apache_conf
+  restart_service
   download_wordpress
   clear_script
   show_info
