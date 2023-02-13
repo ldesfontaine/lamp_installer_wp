@@ -12,10 +12,19 @@ check_apache() {
 
 
 check_MySql(){
-  # Vérification de l'installation de MySQL
+  # Vérification de l'installation de MySQL ou de mariaDB
+#  ON VERRIFIE QUE MARIADB OU MYSQL NE SOIS PAS DEJA INSTALLE
   if ! [ -x "$(command -v mysql)" ]; then
       echo "MySQL n'est pas installé. Installations en cours..."
-      sudo apt-get install mysql -y
+#      si on obtiens une erreur on installe mariaDB
+      try
+      {
+        sudo apt-get install mysql-server -y
+      }
+      catch || {
+        echo "Erreur lors de l'installation de MySQL. Installation de MariaDB en cours..."
+        sudo apt-get install mariadb-server -y
+      }
   else
       echo "MySQL est déjà installé."
   fi
@@ -28,7 +37,7 @@ check_MySql_Secure(){
       echo "MySQL n'est pas installé et sécurisé. Installations en cours..."
       sudo mysql_secure_installation
       touch /root/.mysql_secure_installation
-      #TODO faire une installation plus sécurisé
+      #TODO faire une installation plus sécurisé + probleme connexion mysql/bdd avec wordpress ....
 
   fi
 }
