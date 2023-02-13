@@ -225,6 +225,7 @@ install_lamp(){
   upgrade_LAMP
   check_apache
   check_MySql
+  check_MySql_Secure
   check_PHP
   db_setup
   apache_conf
@@ -238,6 +239,7 @@ install_wordpress_lamp(){
   upgrade_LAMP
   check_apache
   check_MySql
+  check_MySql_Secure
   check_PHP
   db_setup
   apache_conf
