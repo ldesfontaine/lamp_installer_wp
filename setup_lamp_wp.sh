@@ -213,7 +213,7 @@ install_lamp(){
   restart_service
 }
 
-install_wordpress(){
+install_wordpress_lamp(){
   install_lamp
   download_wordpress
   clear_script
@@ -235,9 +235,11 @@ while true; do
     case $option in
         1) info_user
            install_lamp
+           exit 0
            ;;
         2) info_user
            install_wordpress_lamp
+           exit 0
            ;;
         3) usntall_LAMP
            ;;
