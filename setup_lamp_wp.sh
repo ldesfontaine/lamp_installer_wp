@@ -10,6 +10,38 @@ check_apache() {
   fi
 }
 
+apache_conf(){
+# -------- Crée le fichier de configuration Apache --------
+  sudo touch /etc/apache2/sites-available/"$domain".conf
+  sudo chmod 755 /etc/apache2/sites-available/"$domain".conf
+  echo "<VirtualHost *:80>
+       ServerAdmin $email
+       ServerName $domain
+       ServerAlias $Alias
+       DocumentRoot $directory
+
+       ErrorLog ${APACHE_LOG_DIR}/error.$name.log
+       CustomLog ${APACHE_LOG_DIR}/access.$name.log combined
+   </VirtualHost>" > /etc/apache2/sites-available/"$domain".conf
+
+   #on active le site et désactive le site par défaut
+  sudo a2ensite "$domain".conf
+  if [ -f /etc/apache2/sites-enabled/000-default.conf ]; then
+      sudo a2dissite 000-default.conf
+  fi
+}
+
+check_PHP(){
+  # Vérification de l'installation de PHP
+  if ! [ -x "$(command -v php)" ]; then
+      echo "PHP n'est pas installé. Installations en cours..."
+      sudo apt-get install php libapache2-mod-php -y
+      sudo apt-get install php-mysql -y
+  else
+      echo "PHP est déjà installé."
+      sudo apt-get install php-mysql -y
+  fi
+}
 
 check_MySql(){
   # Vérification de l'installation de MySQL ou de mariaDB
@@ -38,15 +70,15 @@ check_MySql_Secure(){
       sudo mysql_secure_installation
       touch /root/.mysql_secure_installation
       #TODO faire une installation plus sécurisé + probleme connexion mysql/bdd avec wordpress ....
-      EOF
-      y
-      secret
-      secret
-      y
-      y
-      y
-      y
-      EOF
+#      EOF
+#      y
+#      secret
+#      secret
+#      y
+#      y
+#      y
+#      y
+#      EOF
   fi
 }
 
@@ -55,39 +87,6 @@ db_setup(){
   mysql -u root -p -e "CREATE DATABASE $dbname"
   mysql -u root -p -e "GRANT ALL PRIVILEGES ON $dbname.* TO $dbuser@localhost IDENTIFIED BY '$dbpass'"
   mysql -u root -p -e "FLUSH PRIVILEGES"
-}
-
-check_PHP(){
-  # Vérification de l'installation de PHP
-  if ! [ -x "$(command -v php)" ]; then
-      echo "PHP n'est pas installé. Installations en cours..."
-      sudo apt-get install php libapache2-mod-php -y
-      sudo apt-get install php-mysql -y
-  else
-      echo "PHP est déjà installé."
-      sudo apt-get install php-mysql -y
-  fi
-}
-
-apache_conf(){
-# -------- Crée le fichier de configuration Apache --------
-  sudo touch /etc/apache2/sites-available/"$domain".conf
-  sudo chmod 755 /etc/apache2/sites-available/"$domain".conf
-  echo "<VirtualHost *:80>
-       ServerAdmin $email
-       ServerName $domain
-       ServerAlias $Alias
-       DocumentRoot $directory
-
-       ErrorLog ${APACHE_LOG_DIR}/error.$name.log
-       CustomLog ${APACHE_LOG_DIR}/access.$name.log combined
-   </VirtualHost>" > /etc/apache2/sites-available/"$domain".conf
-
-   #on active le site et désactive le site par défaut
-  sudo a2ensite "$domain".conf
-  if [ -f /etc/apache2/sites-enabled/000-default.conf ]; then
-      sudo a2dissite 000-default.conf
-  fi
 }
 
 directory_lamp(){
@@ -205,7 +204,7 @@ info_user(){
 
 
 upgrade_LAMP(){
-# -------- Mise a jour et upgrade du systeme --------
+# -------- Mise a jour et upgrade du système --------
   sudo apt-get update -y
   sudo apt-get upgrade -y
 }
@@ -225,7 +224,7 @@ install_lamp(){
   upgrade_LAMP
   check_apache
   check_MySql
-  check_MySql_Secure
+#  check_MySql_Secure
   check_PHP
   db_setup
   apache_conf
@@ -239,8 +238,8 @@ install_wordpress_lamp(){
   upgrade_LAMP
   check_apache
   check_MySql
-  check_MySql_Secure
-  check_PHP
+#  check_MySql_Secure
+  check_PHP+-
   db_setup
   apache_conf
   directory
