@@ -10,6 +10,7 @@ check_apache() {
   fi
 }
 
+
 apache_conf(){
 # -------- Crée le fichier de configuration Apache --------
   sudo touch /etc/apache2/sites-available/"$domain".conf
