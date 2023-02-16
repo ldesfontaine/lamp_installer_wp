@@ -86,7 +86,7 @@ check_MySql_Secure(){
 db_setup(){
   # -------- On crée la base de données --------
   echo 'creation bd'
-  mysql -u root -p -e "CREATE DATABASE testdb5"
+  mysql -u root -p -e "CREATE DATABASE testdb6"
   echo 'creation privilege'
 #  mysql -u root -p -e "GRANT ALL PRIVILEGES ON $dbname.* TO '$dbuser'@'localhost' IDENTIFIED BY '$dbpass'"
   mysql -u root -p -e "GRANT ALL PRIVILEGES ON dbbname.* TO 'dbbuser'@'localhost' IDENTIFIED BY 'dbpass'"
