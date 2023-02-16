@@ -87,7 +87,7 @@ db_setup(){
   # -------- On crée la base de données --------
   mysql -u root -p -e "CREATE DATABASE '$db_name'"
   mysql -u root -p -e "CREATE USER '$db_user'@'localhost' IDENTIFIED BY '$db_pass'"
-  mysql -u root -p -e "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_user'@'localhost'"
+  mysql -u root -p -e "GRANT ALL PRIVILEGES ON '$db_name'.* TO '$db_user'@'localhost'"
   mysql -u root -p -e "FLUSH PRIVILEGES"
 }
 
