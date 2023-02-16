@@ -88,7 +88,7 @@ db_setup(){
   echo 'creation bd'
   mysql -u root -p -e "CREATE DATABASE testdb3"
   echo 'creation privilege'
-  mysql -u root -p -e "GRANT ALL PRIVILEGES ON $dbname.* TO $dbuser@localhost IDENTIFIED BY $dbpass"
+  mysql -u root -p -e "GRANT ALL PRIVILEGES ON $dbname.* TO '$dbuser'@'localhost' IDENTIFIED BY '$dbpass'"
   echo 'flush privilege'
   mysql -u root -p -e "FLUSH PRIVILEGES"
 }
