@@ -215,6 +215,7 @@ usntall_LAMP(){
   # -------- Suppression de LAMP --------
   sudo apt-get remove apache2 -y
   sudo apt-get remove mysql-server -y
+  sudo apt-get remove mariadb-server -y
   sudo apt-get remove php libapache2-mod-php -y
   sudo apt-get remove php-mysql -y
   sudo apt-get autoremove -y
