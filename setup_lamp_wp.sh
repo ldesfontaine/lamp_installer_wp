@@ -86,7 +86,7 @@ check_MySql_Secure(){
 db_setup(){
   # -------- On crée la base de données --------
   echo 'creation bd'
-  mysql -u root -p -e "CREATE DATABASE testdb1"
+  mysql -u root -p -e "CREATE DATABASE testdb2"
   echo 'creation privilege'
   mysql -u root -p -e "GRANT ALL PRIVILEGES ON $dbname.* TO $dbuser@localhost IDENTIFIED BY `$dbpass`"
   echo 'flush privilege'
@@ -243,7 +243,7 @@ install_wordpress_lamp(){
   check_apache
   check_MySql
 #  check_MySql_Secure
-  check_PHP+-
+  check_PHP
   db_setup
   apache_conf
   directory
