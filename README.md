@@ -19,4 +19,4 @@ Désinstallation de votre LAMP : Cette option vous permet de supprimer complète
 Quitter : Cette option vous permet de quitter le script.
 
 ## Note
-Il est important de noter que ce script a été testé et fonctionne correctement avec POPos. Il peut ne pas fonctionner correctement sur d'autres distributions Linux.
+Il est important de noter que ce script a été testé et fonctionne correctement avec debian 11. Il peut ne pas fonctionner correctement sur d'autres distributions Linux.
