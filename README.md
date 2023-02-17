@@ -16,6 +16,7 @@ Installation LAMP & Wordpress : Cette option vous permet d'installer un environn
 Mise à jour & Upgrade de votre LAMP : Cette option vous permet de mettre à jour les paquets de votre environnement LAMP.
 
 Désinstallation de votre LAMP : Cette option vous permet de supprimer complètement votre environnement LAMP de votre serveur.
+
 Quitter : Cette option vous permet de quitter le script.
 
 ## Note
