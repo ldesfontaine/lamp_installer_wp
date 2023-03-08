@@ -198,6 +198,30 @@ info_user(){
   echo ""
 }
 
+log_info(){
+  echo "Nom : $name" >> ~/script_wordpress_"$name"/info_"$name".txt
+  echo "Nom de domaine : $domain" >> ~/script_wordpress_"$name"/info_"$name".txt
+  echo "Adresse mail : $email" >> ~/script_wordpress_"$name"/info_"$name".txt
+  echo "Alias : $Alias" >> ~/script_wordpress_"$name"/info_"$name".txt
+  echo "Répertoire : $directory" >> ~/script_wordpress_"$name"/info_"$name".txt
+  echo "Nom de la base de données : $db_name" >> ~/script_wordpress_"$name"/info_"$name".txt
+  echo "Nom de l'utilisateur : $db_user" >> ~/script_wordpress_"$name"/info_"$name".txt
+  echo "Mot de passe de l'utilisateur : $db_pass" >> ~/script_wordpress_"$name"/info_"$name".txt
+}
+
+setup_wp_config(){
+  # -------- On se place dans le repertoire $directory --------
+  cd "$directory"
+  # -------- On copie le fichier wp-config-sample.php en wp-config.php --------
+  sudo cp wp-config-sample.php wp-config.php
+  # -------- On remplace les informations de connexion à la base de données --------
+  sudo sed -i "s/database_name_here/$db_name/g" wp-config.php
+  sudo sed -i "s/username_here/$db_user/g" wp-config.php
+  sudo sed -i "s/password_here/$db_pass/g" wp-config.php
+  # -------- On génère une clé secrète --------
+  sudo sed -i "s/put your unique phrase here/$(curl -s https://api.wordpress.org/secret-key/1.1/salt)/g" wp-config.php
+}
+
 
 
 
@@ -250,6 +274,7 @@ install_wordpress_lamp(){
   clear_script
   restart_service
   show_info
+  log_info
 }
 
 
