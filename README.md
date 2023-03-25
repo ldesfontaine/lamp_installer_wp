@@ -8,6 +8,12 @@ Rendez-vous dans le répertoire où se trouve le script en utilisant la commande
 Pour lancer le script faire : " sudo bash setup_lamp_wp.sh "
 Suivez les instructions à l'écran pour installer LAMP et Wordpress, mettre à jour ou supprimer l'environnement.
 
+`Pour plus d'informations sur l'utilisation du script regarder cette documentation :`
+```
+https://github.com/ldesfontaine/Documentation/blob/be048a4eb66fa67a3addb9686c070ff967063425/Lamp_installer.md
+```
+
+
 ## Options
 Installation LAMP : Cette option vous permet d'installer un environnement LAMP sur votre serveur. Il vous demandera votre nom, le nom de domaine et votre adresse e-mail pour configurer Apache.
 
