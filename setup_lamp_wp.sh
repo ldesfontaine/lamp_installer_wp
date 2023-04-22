@@ -12,6 +12,10 @@ check_apache() {
 
 
 apache_conf(){
+#On créer un dossier pour les tous les logs
+sudo mkdir ${APACHE_LOG_DIR}/logs_apache/
+sudo chmod 755 ${APACHE_LOG_DIR}/logs_apache/
+
 # -------- Crée le fichier de configuration Apache --------
   sudo touch /etc/apache2/sites-available/"$domain".conf
   sudo chmod 755 /etc/apache2/sites-available/"$domain".conf
@@ -21,8 +25,8 @@ apache_conf(){
        ServerAlias $Alias
        DocumentRoot $directory
 
-       ErrorLog ${APACHE_LOG_DIR}/error.$name.log
-       CustomLog ${APACHE_LOG_DIR}/access.$name.log combined
+        ErrorLog ${APACHE_LOG_DIR}/logs_apache/error.$name.log
+        CustomLog ${APACHE_LOG_DIR}/logs_apache/access.$name.log combined
    </VirtualHost>" > /etc/apache2/sites-available/"$domain".conf
 
    #on active le site et désactive le site par défaut
