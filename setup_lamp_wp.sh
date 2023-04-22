@@ -163,7 +163,7 @@ show_info(){
   echo "Installation de Wordpress terminée"
   echo ""
   echo "Pour accéder à l'interface d'administration de Wordpress, rendez-vous à l'adresse suivante dans votre navigateur :"
-  echo "http://$domain/wordpress/wp-admin"
+  echo "http://$domain/wp-admin"
   echo ""
   echo "Maintenant il faut configurer le certificat SSL via certbot. "
   echo "Si vous avez une backup de wordpress, suivez également les instructions dans la documentations. "
