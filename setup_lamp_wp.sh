@@ -22,7 +22,7 @@ sudo chmod 755 ${APACHE_LOG_DIR}/logs_apache/
   echo "<VirtualHost *:80>
        ServerAdmin $email
        ServerName $domain
-       ServerAlias $Alias
+       ServerAlias $serverAlias
        DocumentRoot $directory
 
         ErrorLog ${APACHE_LOG_DIR}/logs_apache/error.$name.log
@@ -191,13 +191,14 @@ info_user(){
  #Create full path for var/www & $name
   directory="/var/www/$name"
   domain="$name.$Alias"
+  serverAlias="www.$domain"
 
   #Affiche les informations saisies
   echo ""
   echo "Vous avez saisi : { $name } comme nom"
   echo "Vous avez saisi : { $domain } comme nom de domaine / url"
   echo "Vous avez saisi : { $email } comme adresse mail"
-  echo "Vous avez saisi : { $Alias } comme alias / nom de domaine"
+  echo "Vous avez saisi : { $Alias } - { $serverAlias } comme alias / nom de domaine"
   echo "Vous avez saisi : { $directory } comme répertoire"
   echo ""
 }
