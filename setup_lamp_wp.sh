@@ -13,8 +13,8 @@ check_apache() {
 
 apache_conf(){
 #On créer un dossier pour les tous les logs
-sudo mkdir ${APACHE_LOG_DIR}/logs_apache/
-sudo chmod 755 ${APACHE_LOG_DIR}/logs_apache/
+sudo mkdir "${APACHE_LOG_DIR}"/logs_apache/
+sudo chmod 755 "${APACHE_LOG_DIR}"/logs_apache/
 
 # -------- Crée le fichier de configuration Apache --------
   sudo touch /etc/apache2/sites-available/"$domain".conf
@@ -44,6 +44,7 @@ check_PHP(){
       sudo apt-get install php-mysql -y
   else
       echo "PHP est déjà installé."
+      sudo apt-get install libapache2-mod-php -y
       sudo apt-get install php-mysql -y
   fi
 }
@@ -126,25 +127,25 @@ download_wordpress(){
   echo "Installation de Wordpress en cours..."
   echo ""
 
-  cd ~
+  cd ~ || exit
   mkdir script_wordpress_"$name"
-  cd script_wordpress_"$name"
+  cd script_wordpress_"$name" || exit
   # -------- Téléchargement de Wordpress --------
   wget https://wordpress.org/latest.tar.gz
   #on déplace le dossier dans le répertorie $directory
   sudo mv latest.tar.gz "$directory"
   # -------- On se place dans le repertoire $directory --------
-  cd "$directory"
+  cd "$directory" || exit
   # -------- On extrait le fichier --------
   sudo tar -xvf latest.tar.gz
   # -------- On supprime le fichier tar.gz --------
   sudo rm -r latest.tar.gz
   # -------- On se place dans le repertoire wordpress --------
-  cd wordpress
+  cd wordpress || exit
   # -------- On copie le contenu du repertoire wordpress dans le repertoire $directory --------
   sudo cp -r * "$directory"
   # -------- On se place dans le repertoire $directory --------
-  cd "$directory"
+  cd "$directory" || exit
   # -------- On supprime le repertoire wordpress --------
   sudo rm -r wordpress
   # -------- On donne les droits au repertoire $directory --------
@@ -154,7 +155,7 @@ download_wordpress(){
 
 clear_script(){
   #on supprime les dossiers & fichiers inutiles
-  cd ~
+  cd ~ || exit
   sudo rm -r script_wordpress_"$name"
 }
 
@@ -256,6 +257,9 @@ install_wordpress_lamp(){
   restart_service
   show_info
 }
+
+
+
 
 
 # -------- Menu --------
